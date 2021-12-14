@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { counterSlice } from '../features/counter';
-import { logSlice, LogState } from '../features/log';
-import { AppState } from '../store';
+import { counterSlice } from '../slice/counter';
+import { logSlice, LogState } from '../slice/log';
+import { AppState } from '../store/store';
 
 type Props = {
   samplePropData?: string;

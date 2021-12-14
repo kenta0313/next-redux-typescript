@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 
-import { counterSlice, CounterState } from './features/counter';
-import { logSlice, LogState } from './features/log';
+import { counterSlice, CounterState } from '../slice/counter';
+import { logSlice, LogState } from '../slice/log';
 
 export type AppState = {
   counter: CounterState;
@@ -14,6 +14,8 @@ const rootReducer = combineReducers<AppState>({
   log: logSlice.reducer,
 });
 
-const store = configureStore({ reducer: rootReducer });
+export const store = configureStore({
+  reducer: rootReducer,
+});
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>;
