@@ -1,22 +1,16 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { countSelector, logSelector } from '../selector/selector';
 import { counterSlice } from '../slice/counter';
-import { logSlice, LogState } from '../slice/log';
-import { AppState } from '../store/store';
+import { logSlice } from '../slice/log';
 
 type Props = {
   samplePropData?: string;
 };
 
 const Sample: FC<Props> = ({ samplePropData }) => {
-  const { count, log } = useSelector<
-    AppState,
-    { count: number; log: LogState }
-  >((state) => ({
-    count: state.counter.count,
-    log: state.log,
-  }));
+  const count = useSelector(countSelector);
+  const log = useSelector(logSelector);
   const dispatch = useDispatch();
   const { incrementCount, decrementCount } = counterSlice.actions;
   const { addLog, deleteLog, setLogLoading } = logSlice.actions;
@@ -27,7 +21,7 @@ const Sample: FC<Props> = ({ samplePropData }) => {
       <p>samplePropData: {samplePropData}</p>
       <h2>Counter State</h2>
       <p>count: {count}</p>
-      <button type="button" onClick={() => dispatch(incrementCount())}>
+      <button type="button" onClick={() => dispatch(incrementCount(6))}>
         incrementCount
       </button>
       <button type="button" onClick={() => dispatch(decrementCount())}>
