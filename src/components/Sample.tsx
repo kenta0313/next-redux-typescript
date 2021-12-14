@@ -4,12 +4,7 @@ import { countSelector, logSelector } from '../selector/selector';
 import { counterSlice } from '../slice/counter';
 import { logSlice } from '../slice/log';
 
-type Props = {
-  samplePropData?: string;
-};
-
-const Sample: FC<Props> = ({ samplePropData }) => {
-  const count = useSelector(countSelector);
+export const Sample = (props: any) => {
   const log = useSelector(logSelector);
   const dispatch = useDispatch();
   const { incrementCount, decrementCount } = counterSlice.actions;
@@ -18,10 +13,10 @@ const Sample: FC<Props> = ({ samplePropData }) => {
   return (
     <div style={{ padding: '12px', backgroundColor: '#eee' }}>
       <h1>Sample Component</h1>
-      <p>samplePropData: {samplePropData}</p>
+      <p>samplePropData</p>
       <h2>Counter State</h2>
-      <p>count: {count}</p>
-      <button type="button" onClick={() => dispatch(incrementCount(6))}>
+      <p>count: {props.count}</p>
+      <button type="button" onClick={() => dispatch(props.incrementCount(6))}>
         incrementCount
       </button>
       <button type="button" onClick={() => dispatch(decrementCount())}>
@@ -45,5 +40,3 @@ const Sample: FC<Props> = ({ samplePropData }) => {
     </div>
   );
 };
-
-export default Sample;
