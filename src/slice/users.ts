@@ -1,10 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../selector/selector';
-import { AppDispatch } from '../store/store';
-
-interface Response {
-  users: any[];
-}
 
 export const getUsers = createAsyncThunk('users/getUsers', async () => {
   return await fetch('https://jsonplaceholder.typicode.com/users').then((res) =>
