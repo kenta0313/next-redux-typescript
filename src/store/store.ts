@@ -6,14 +6,7 @@ import { logSlice, LogState } from '../slice/log';
 import { initialstate, usersSlice } from '../slice/users';
 import { userApi } from '../rtkquery';
 
-export type AppState = {
-  counter: CounterState;
-  log: LogState;
-  users: initialstate;
-  [userApi.reducerPath]:any;
-};
-
-const rootReducer = combineReducers<AppState>({
+const rootReducer = combineReducers({
   counter: counterSlice.reducer,
   log: logSlice.reducer,
   users: usersSlice.reducer,
