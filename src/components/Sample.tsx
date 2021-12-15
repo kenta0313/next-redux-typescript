@@ -1,16 +1,26 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { countSelector, logSelector } from '../selector/selector';
+import { useGetUsersQuery } from '../rtkquery';
+import { countSelector, logSelector, usersSelector } from '../selector/selector';
 import { counterSlice } from '../slice/counter';
 import { logSlice } from '../slice/log';
+import { getUsers } from '../slice/users';
 
 export const Sample = (props: any) => {
   const log = useSelector(logSelector);
   const dispatch = useDispatch();
-  const { incrementCount, decrementCount } = counterSlice.actions;
+  const { decrementCount } = counterSlice.actions;
   const { addLog, deleteLog, setLogLoading } = logSlice.actions;
+  const users = useSelector(usersSelector);
+  const user = users.users;
+  const {data, error, isFetching} = useGetUsersQuery();
+  console.log(data);
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
 
   return (
+    <>
     <div style={{ padding: '12px', backgroundColor: '#eee' }}>
       <h1>Sample Component</h1>
       <p>samplePropData</p>
@@ -38,5 +48,13 @@ export const Sample = (props: any) => {
         setLogLoading
       </button>
     </div>
+    {error && <div>エラー</div>}
+    {isFetching  && <div>ロード</div>}
+    {data&& data.map((user, id) => (
+      <div key={id}>
+        <h2>{user.name}</h2>
+      </div>
+    ))}
+    </>
   );
 };
