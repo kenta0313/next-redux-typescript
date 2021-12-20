@@ -2,8 +2,8 @@ import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 
 import { counterSlice, CounterState } from '../slice/counter';
-import { logSlice, LogState } from '../slice/log';
-import { initialstate, usersSlice } from '../slice/users';
+import { logSlice } from '../slice/log';
+import { usersSlice } from '../slice/users';
 import { userApi } from '../rtkquery';
 
 const rootReducer = combineReducers({
